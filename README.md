@@ -39,7 +39,7 @@ A comprehensive backend system that helps students with academic assignments thr
 
 1. **Clone and Setup**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/hopeIsCo0l/AAHPD.git
    cd academic-assignment-helper
    ```
 
