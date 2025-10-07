@@ -1,0 +1,332 @@
+{
+  "name": "Assignment Analysis Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "assignment",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Assignment Upload Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "assignment-upload"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "file-exists",
+              "leftValue": "={{ $json.file_path }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "file-check",
+      "name": "Check File Exists",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "command": "python3 -c \"import sys; import PyPDF2; import docx; import os; file_path='{{ $json.file_path }}'; file_ext=file_path.split('.')[-1].lower(); content=''; print('Extracting text from:', file_path); print('File exists:', os.path.exists(file_path)); print('File extension:', file_ext); sys.exit(0)\""
+      },
+      "id": "text-extraction",
+      "name": "Extract Text from File",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "model": "gpt-3.5-turbo",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an academic assistant that analyzes student assignments. Extract the main topic, academic level, key themes, and research questions from the assignment text."
+            },
+            {
+              "role": "user",
+              "content": "Analyze this assignment and provide:\n1. Main topic/subject\n2. Academic level (High School, Undergraduate, Graduate, PhD)\n3. Key themes and concepts\n4. Research questions identified\n5. Word count\n\nAssignment text:\n{{ $json.extracted_text }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.3,
+          "maxTokens": 500
+        }
+      },
+      "id": "ai-analysis",
+      "name": "AI Content Analysis",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-ada-002",
+        "input": "={{ $json.extracted_text }}"
+      },
+      "id": "generate-embedding",
+      "name": "Generate Text Embedding",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, title, authors, abstract, source_type, embedding <-> $1 as distance FROM academic_sources ORDER BY embedding <-> $1 LIMIT 5",
+        "additionalFields": {
+          "queryParams": "={{ $json.embedding }}"
+        }
+      },
+      "id": "rag-search",
+      "name": "RAG Source Search",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1120, 400]
+    },
+    {
+      "parameters": {
+        "model": "gpt-3.5-turbo",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a plagiarism detection assistant. Compare the assignment text with the provided academic sources and identify potential plagiarism."
+            },
+            {
+              "role": "user",
+              "content": "Assignment text:\n{{ $json.extracted_text }}\n\nAcademic sources to compare against:\n{{ $json.rag_sources }}\n\nIdentify any potential plagiarism and provide similarity scores."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.1,
+          "maxTokens": 300
+        }
+      },
+      "id": "plagiarism-detection",
+      "name": "Plagiarism Detection",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "assignments",
+        "updateKey": "id",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "original_text": "={{ $json.extracted_text }}",
+            "topic": "={{ $json.ai_analysis.topic }}",
+            "academic_level": "={{ $json.ai_analysis.academic_level }}",
+            "word_count": "={{ $json.ai_analysis.word_count }}"
+          }
+        },
+        "where": {
+          "conditions": [
+            {
+              "column": "id",
+              "condition": "equal",
+              "value": "={{ $json.assignment_id }}"
+            }
+          ]
+        }
+      },
+      "id": "update-assignment",
+      "name": "Update Assignment Record",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "analysis_results",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "assignment_id": "={{ $json.assignment_id }}",
+            "suggested_sources": "={{ JSON.stringify($json.rag_sources) }}",
+            "plagiarism_score": "={{ $json.plagiarism_analysis.similarity_score }}",
+            "flagged_sections": "={{ JSON.stringify($json.plagiarism_analysis.flagged_sections) }}",
+            "research_suggestions": "={{ $json.ai_analysis.research_suggestions }}",
+            "citation_recommendations": "={{ $json.ai_analysis.citation_recommendations }}",
+            "confidence_score": "={{ $json.ai_analysis.confidence_score }}"
+          }
+        }
+      },
+      "id": "store-analysis",
+      "name": "Store Analysis Results",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"success\", \"assignment_id\": $json.assignment_id, \"message\": \"Analysis completed successfully\" } }}"
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"error\", \"message\": \"File not found or invalid file path\" } }}"
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 500]
+    }
+  ],
+  "connections": {
+    "Assignment Upload Webhook": {
+      "main": [
+        [
+          {
+            "node": "Check File Exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check File Exists": {
+      "main": [
+        [
+          {
+            "node": "Extract Text from File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Text from File": {
+      "main": [
+        [
+          {
+            "node": "AI Content Analysis",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Text Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Content Analysis": {
+      "main": [
+        [
+          {
+            "node": "Plagiarism Detection",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Text Embedding": {
+      "main": [
+        [
+          {
+            "node": "RAG Source Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG Source Search": {
+      "main": [
+        [
+          {
+            "node": "Update Assignment Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Plagiarism Detection": {
+      "main": [
+        [
+          {
+            "node": "Update Assignment Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Assignment Record": {
+      "main": [
+        [
+          {
+            "node": "Store Analysis Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Analysis Results": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "versionId": "1"
+}
