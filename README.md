@@ -2,7 +2,7 @@
 
 A comprehensive backend system that helps students with academic assignments through AI-powered analysis, RAG-based research suggestions, and plagiarism detection.
 
-## 🚀 Features
+## Features
 
 - **JWT-based Authentication** - Secure API endpoints with role-based access
 - **File Upload & Processing** - Support for PDF and Word documents
@@ -12,7 +12,7 @@ A comprehensive backend system that helps students with academic assignments thr
 - **Vector Database** - PostgreSQL with pgvector for semantic search
 - **Dockerized Setup** - Easy deployment with Docker Compose
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -29,13 +29,13 @@ A comprehensive backend system that helps students with academic assignments thr
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Docker and Docker Compose
 - OpenAI API Key (for AI analysis)
 - Python 3.11+ (for local development)
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Clone and Setup**
    ```bash
@@ -64,7 +64,7 @@ A comprehensive backend system that helps students with academic assignments thr
    - **n8n Interface**: http://localhost:5678 (admin/admin123)
    - **pgAdmin**: http://localhost:5050 (admin@admin.com/admin)
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /auth/register` - Register new student
@@ -78,7 +78,7 @@ A comprehensive backend system that helps students with academic assignments thr
 ### Health Check
 - `GET /health` - Service health status
 
-## 📊 Database Schema
+## Database Schema
 
 ### Students Table
 ```sql
@@ -136,7 +136,7 @@ CREATE TABLE academic_sources (
 );
 ```
 
-## 🔄 n8n Workflow
+## n8n Workflow
 
 The n8n workflow handles:
 1. **File Processing** - Text extraction from PDF/Word documents
@@ -145,7 +145,7 @@ The n8n workflow handles:
 4. **Plagiarism Detection** - AI-powered similarity analysis
 5. **Database Storage** - Structured storage of analysis results
 
-## 🛠️ Development
+## Development
 
 ### Local Development Setup
 
@@ -183,7 +183,7 @@ JWT_SECRET_KEY=your-super-secret-jwt-key
 N8N_WEBHOOK_URL=http://n8n:5678/webhook/assignment
 ```
 
-## 📝 Usage Examples
+## Usage Examples
 
 ### 1. Register and Login
 ```bash
@@ -225,7 +225,7 @@ curl -X GET "http://localhost:8000/sources?query=machine learning education" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
-## 🔒 Security Features
+## Security Features
 
 - JWT-based authentication
 - Role-based access control
@@ -233,7 +233,7 @@ curl -X GET "http://localhost:8000/sources?query=machine learning education" \
 - Input sanitization
 - Secure password handling (in production)
 
-## 🚀 Production Deployment
+## Production Deployment
 
 1. **Update Environment Variables**
    - Use strong, unique passwords
@@ -247,12 +247,12 @@ curl -X GET "http://localhost:8000/sources?query=machine learning education" \
    - Monitor logs and access
 
 3. **Scaling Considerations**
-   - Use managed database services
-   - Implement caching (Redis)
-   - Load balancing for API
-   - CDN for file storage
+   Use managed database services
+   Implement caching (Redis)
+   Load balancing for API
+   CDN for file storage
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -260,18 +260,18 @@ curl -X GET "http://localhost:8000/sources?query=machine learning education" \
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🆘 Support
+## Support
 
 For support and questions:
 - Create an issue in the repository
 - Check the documentation
 - Review the API documentation at `/docs`
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Real-time collaboration features
 - [ ] Advanced plagiarism detection algorithms
@@ -282,3 +282,4 @@ For support and questions:
 - [ ] Citation formatting tools
 - [ ] Peer review system
 # AAHPD
+by Abdellah Teshome
