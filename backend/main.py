@@ -47,13 +47,35 @@ rag_service = RAGService()
 def init_database():
     """Initialize database with tables and sample data"""
     try:
-        from models import create_tables, init_db
+        from models import create_tables, init_db, engine
+        from sqlalchemy import text
+        
         logger.info("Initializing database...")
-        create_tables()
+        
+        # Check if tables exist
+        with engine.connect() as conn:
+            result = conn.execute(text("""
+                SELECT EXISTS (
+                    SELECT FROM information_schema.tables 
+                    WHERE table_schema = 'public' 
+                    AND table_name = 'students'
+                );
+            """))
+            tables_exist = result.scalar()
+            
+        if not tables_exist:
+            logger.info("Creating database tables...")
+            create_tables()
+            logger.info("Tables created successfully!")
+        else:
+            logger.info("Tables already exist, skipping creation...")
+        
+        # Initialize sample data
         init_db()
         logger.info("Database initialized successfully!")
     except Exception as e:
         logger.error(f"Database initialization failed: {e}")
+        raise e
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="web_interface"), name="static")
