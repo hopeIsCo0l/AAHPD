@@ -70,6 +70,17 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "message": "Academic Assignment Helper API is running"}
 
+# Database initialization endpoint
+@app.post("/init-db")
+async def init_database_endpoint():
+    """Initialize database tables and sample data"""
+    try:
+        init_database()
+        return {"status": "success", "message": "Database initialized successfully!"}
+    except Exception as e:
+        logger.error(f"Database initialization failed: {e}")
+        return {"status": "error", "message": f"Database initialization failed: {str(e)}"}
+
 # Startup event
 @app.on_event("startup")
 async def startup_event():
