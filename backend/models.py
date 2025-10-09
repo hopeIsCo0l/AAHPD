@@ -81,7 +81,7 @@ class AcademicSource(Base):
     abstract = Column(Text)
     full_text = Column(Text)
     source_type = Column(String, nullable=False)  # 'paper', 'textbook', 'course_material'
-    embedding = Column(Vector(1536))  # OpenAI embedding dimension
+    # embedding = Column(Vector(1536))  # OpenAI embedding dimension - disabled for Railway compatibility
     created_at = Column(DateTime, default=datetime.utcnow)
 
 def get_db():
