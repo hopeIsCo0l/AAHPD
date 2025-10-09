@@ -2,9 +2,17 @@ from sqlalchemy import create_engine, Column, Integer, String, Text, Float, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.dialects.postgresql import JSONB
-from pgvector.sqlalchemy import Vector
 from datetime import datetime
 import os
+
+# Try to import pgvector, fallback to regular column if not available
+try:
+    from pgvector.sqlalchemy import Vector
+    VECTOR_AVAILABLE = True
+except ImportError:
+    VECTOR_AVAILABLE = False
+    # Fallback to regular column type
+    Vector = lambda x: Text
 
 # Database URL
 DATABASE_URL = os.getenv(

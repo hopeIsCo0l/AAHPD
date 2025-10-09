@@ -52,6 +52,16 @@ def init_database():
         
         logger.info("Initializing database...")
         
+        # Try to enable pgvector extension
+        try:
+            with engine.connect() as conn:
+                conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
+                conn.commit()
+                logger.info("pgvector extension enabled successfully")
+        except Exception as e:
+            logger.warning(f"Could not enable pgvector extension: {e}")
+            logger.info("Continuing without vector support...")
+        
         # Check if tables exist
         with engine.connect() as conn:
             result = conn.execute(text("""
