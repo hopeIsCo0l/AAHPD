@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ .
 COPY data/ ./data/
 COPY scripts/ ./scripts/
+COPY web_interface/ ./web_interface/
 COPY start.sh ./
 
 # Create uploads directory

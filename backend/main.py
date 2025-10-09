@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import jwt
 import os
 from datetime import datetime, timedelta
@@ -52,6 +54,21 @@ def init_database():
         logger.info("Database initialized successfully!")
     except Exception as e:
         logger.error(f"Database initialization failed: {e}")
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="web_interface"), name="static")
+
+# Root endpoint - serve the web interface
+@app.get("/")
+async def read_root():
+    """Serve the main web interface"""
+    return FileResponse("web_interface/index.html")
+
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "message": "Academic Assignment Helper API is running"}
 
 # Startup event
 @app.on_event("startup")
