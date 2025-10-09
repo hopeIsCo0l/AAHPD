@@ -92,6 +92,44 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "message": "Academic Assignment Helper API is running"}
 
+# Database status endpoint
+@app.get("/db-status")
+async def database_status():
+    """Check database status and tables"""
+    try:
+        from models import engine
+        from sqlalchemy import text
+        
+        with engine.connect() as conn:
+            # Check if students table exists
+            result = conn.execute(text("""
+                SELECT EXISTS (
+                    SELECT FROM information_schema.tables 
+                    WHERE table_schema = 'public' 
+                    AND table_name = 'students'
+                );
+            """))
+            students_exists = result.scalar()
+            
+            # List all tables
+            result = conn.execute(text("""
+                SELECT table_name 
+                FROM information_schema.tables 
+                WHERE table_schema = 'public'
+                ORDER BY table_name;
+            """))
+            tables = [row[0] for row in result.fetchall()]
+            
+            return {
+                "status": "success",
+                "students_table_exists": students_exists,
+                "all_tables": tables,
+                "database_url": os.getenv("DATABASE_URL", "Not set")
+            }
+    except Exception as e:
+        logger.error(f"Database status check failed: {e}")
+        return {"status": "error", "message": f"Database status check failed: {str(e)}"}
+
 # Database initialization endpoint
 @app.post("/init-db")
 async def init_database_endpoint():
