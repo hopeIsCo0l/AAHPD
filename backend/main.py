@@ -41,6 +41,24 @@ N8N_WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL", "http://n8n:5678/webhook/assignme
 # Initialize RAG service
 rag_service = RAGService()
 
+# Database initialization function
+def init_database():
+    """Initialize database with tables and sample data"""
+    try:
+        from models import create_tables, init_db
+        logger.info("Initializing database...")
+        create_tables()
+        init_db()
+        logger.info("Database initialized successfully!")
+    except Exception as e:
+        logger.error(f"Database initialization failed: {e}")
+
+# Startup event
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on startup"""
+    init_database()
+
 @app.post("/auth/register")
 async def register_student(
     email: str = Form(...),
