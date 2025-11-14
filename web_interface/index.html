@@ -25,50 +25,173 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #f3f4fa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-mesh {
+            position: absolute;
+            top: -194px;
+            left: -451px;
+            width: 2107.89px;
+            height: 1539.71px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .auth-logo-bg {
+            position: absolute;
+            top: -81px;
+            left: 44px;
+            width: 1352.14px;
+            height: 1185.87px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.1;
         }
         
         .auth-card {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
+            padding: 44px;
+            border-radius: 24px;
+            border: 1px solid #e2eafb;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 444px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .auth-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .auth-logo-icon {
+            width: 51px;
+            height: 51px;
+            margin-bottom: 0;
+        }
+        
+        .auth-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
         }
         
         .auth-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1e293b;
+            font-size: 25px;
+            font-weight: 500;
+            color: #000000;
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            line-height: 30px;
+        }
+        
+        .auth-subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748b;
+            text-align: center;
+            line-height: 21px;
+            margin-top: 0;
+        }
+        
+        .auth-form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .auth-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0;
         }
         
         .form-group label {
-            display: block;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 0.5rem;
+            display: none;
         }
         
-        .form-group input {
+        .input-field {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s;
+            padding: 12px 16px;
+            background-color: #f3f7fa;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
         }
         
-        .form-group input:focus {
+        .input-field:focus-within {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 1px #587bf6;
+        }
+        
+        .input-field input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            outline: none;
+            padding: 0;
+        }
+        
+        .input-field input::placeholder {
+            color: #64748b;
+        }
+        
+        .input-field.input-no-icon {
+            padding-left: 16px;
+        }
+        
+        .input-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .input-field-password {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+        }
+        
+        .password-toggle {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .btn {
@@ -85,13 +208,22 @@
         }
         
         .btn-primary {
-            background-color: #3b82f6;
+            background-color: #587bf6;
             color: white;
             width: 100%;
+            border: 1px solid #ced7ea;
+            border-radius: 12px;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
         
         .btn-primary:hover {
-            background-color: #2563eb;
+            background-color: #4a6ef5;
         }
         
         .btn-secondary {
@@ -105,95 +237,240 @@
         
         .btn-link {
             background: none;
-            color: #3b82f6;
+            color: #587bf6;
             text-decoration: underline;
-            padding: 0.5rem 0;
+            padding: 0;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
         }
         
         .btn-link:hover {
-            color: #2563eb;
+            color: #4a6ef5;
         }
         
         .auth-switch {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+        }
+        
+        .auth-switch .btn-link {
+            display: inline;
         }
         
         /* Main Application Layout */
         .app-container {
             display: flex;
             min-height: 100vh;
+            background-color: #f9f9fb;
         }
         
         .sidebar {
-            width: 250px;
+            width: 256px;
             background: white;
-            border-right: 1px solid #e2e8f0;
-            padding: 1.5rem 0;
+            border-right: 1px solid #e7eaee;
+            padding: 32px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
         }
         
-        .sidebar-header {
-            padding: 0 1.5rem 1.5rem;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 1rem;
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
         
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1e293b;
+        .company-logo {
+            width: 44px;
+            height: 44px;
+        }
+        
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .nav-section-header {
+            padding: 0 12px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748b;
+            line-height: 21px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         
         .nav-item {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: #4b5768;
             text-decoration: none;
             transition: all 0.2s;
-            border-left: 3px solid transparent;
+            border-radius: 12px;
+            background-color: white;
+            font-size: 16px;
+            font-weight: 400;
         }
         
         .nav-item:hover {
-            background-color: #f1f5f9;
-            color: #334155;
+            background-color: #f7f8f9;
         }
         
         .nav-item.active {
-            background-color: #eff6ff;
-            color: #3b82f6;
-            border-left-color: #3b82f6;
+            background-color: #e8edfb;
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+        
+        .nav-item.active .nav-text {
+            color: #1d4ed8;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        
+        .nav-text {
+            color: inherit;
+        }
+        
+        .nav-bottom {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 16px;
+            padding-bottom: 24px;
+            border-top: 1px solid #e7eaee;
+            padding-top: 24px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            margin-top: auto;
+        }
+        
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 0.5px solid rgba(158, 212, 250, 0.5);
+            background-color: #88aeff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .user-avatar img {
+            width: 88.85%;
+            height: 88.85%;
+            object-fit: cover;
+        }
+        
+        .user-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #000000;
+            line-height: 27px;
+        }
+        
+        .user-email {
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748b;
+            line-height: 21px;
         }
         
         .main-content {
             flex: 1;
-            padding: 2rem;
+            margin-left: 256px;
+            display: flex;
+            flex-direction: column;
         }
         
-        .header {
+        .top-header {
+            background: white;
+            border-bottom: 1px solid #e7eaee;
+            padding: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e2e8f0;
         }
         
-        .user-info {
+        .page-header {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 4px;
         }
         
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #3b82f6;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .page-title {
+            font-size: 25px;
             font-weight: 600;
+            color: #000000;
+            line-height: 30px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            color: #64748b;
+            line-height: 24px;
+        }
+        
+        .upload-btn-header {
+            background-color: #587bf6;
+            border: 1px solid #ced7ea;
+            border-radius: 8px;
+            padding: 8px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .upload-btn-header:hover {
+            background-color: #4a6ef5;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            overflow-y: auto;
         }
         
         /* Cards */
@@ -213,99 +490,316 @@
         }
         
         /* Upload Area */
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .upload-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #0d0f11;
+            line-height: 24px;
+        }
+        
         .upload-area {
-            border: 2px dashed #d1d5db;
+            background-color: #f7f8f9;
+            border: 1px dashed #d0d5dd;
             border-radius: 8px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.2s;
+            height: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 44px 24px;
             cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
         
         .upload-area:hover {
-            border-color: #3b82f6;
-            background-color: #f8fafc;
+            border-color: #1d4ed8;
+            background-color: #e8edfb;
         }
         
         .upload-area.dragover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
+            border-color: #1d4ed8;
+            background-color: #e8edfb;
+        }
+        
+        .upload-area.analyzing {
+            background-color: #f7f8f9;
+            border: 1px solid #d0d5dd;
+            cursor: default;
+        }
+        
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
         }
         
         .upload-icon {
-            font-size: 3rem;
-            color: #9ca3af;
-            margin-bottom: 1rem;
+            width: 24px;
+            height: 24px;
         }
         
         .upload-text {
-            font-size: 1.125rem;
-            color: #374151;
-            margin-bottom: 0.5rem;
+            font-size: 14px;
+            color: #0d0f11;
+            line-height: 21px;
+        }
+        
+        .upload-text-bold {
+            font-weight: 600;
         }
         
         .upload-subtext {
-            color: #6b7280;
-            font-size: 0.875rem;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 21px;
+        }
+        
+        .upload-analyzing-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d4ed8;
+            line-height: 21px;
+        }
+        
+        .upload-analyzing-subtext {
+            font-size: 12px;
+            color: #112f82;
+            line-height: 21px;
+        }
+        
+        .upload-gradient-mesh {
+            position: absolute;
+            width: 1171.46px;
+            height: 838.557px;
+            left: -192px;
+            top: -330px;
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         /* Analysis Results */
-        .score-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .main-card {
+            background: white;
+            border: 1px solid #e7eaee;
+            border-radius: 8px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .report-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .report-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #0d0f11;
+            line-height: 24px;
+        }
+        
+        .report-title-label {
+            color: #64748b;
+        }
+        
+        .score-cards {
+            display: flex;
+            gap: 12px;
         }
         
         .score-card {
-            text-align: center;
-            padding: 1.5rem;
+            flex: 1;
+            border: 1px solid #e7eaee;
             border-radius: 8px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+            background-color: #dae2ff;
+        }
+        
+        .score-card-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .score-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .score-card-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #0d0f11;
+            line-height: 27px;
+        }
+        
+        .score-card-tag {
+            background-color: #e8edfb;
+            border: 0.5px solid #bbcaf3;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .score-card-tag-icon {
+            width: 16px;
+            height: 16px;
         }
         
         .score-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+            font-size: 39px;
+            font-weight: 500;
+            color: #1d4ed8;
+            line-height: 42.9px;
         }
         
-        .score-label {
-            color: #64748b;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .info-cards {
+            display: flex;
+            gap: 12px;
         }
         
-        .score-good { color: #059669; }
-        .score-warning { color: #d97706; }
-        .score-danger { color: #dc2626; }
-        
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .metric-chip {
-            background: #f1f5f9;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
+        .info-card {
+            flex: 1;
+            background-color: #f7f8f9;
+            border: 1px solid #e7eaee;
+            border-radius: 8px;
+            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
             text-align: center;
         }
         
-        .metric-label {
-            font-size: 0.75rem;
+        .info-label {
+            font-size: 14px;
+            font-weight: 400;
             color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
+            line-height: 24px;
         }
         
-        .metric-value {
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #0d0f11;
+            line-height: 24px;
+        }
+        
+        .suggestions-section {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .suggestion-card {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #e7eaee;
+            border-radius: 8px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .suggestion-card-left {
+            background-color: white;
+        }
+        
+        .suggestion-card-right {
+            background-color: #f7f8f9;
+        }
+        
+        .suggestion-gradient {
+            position: absolute;
+            width: 1351.45px;
+            height: 770.001px;
+            left: -452px;
+            top: -234px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .suggestion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .suggestion-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #0d0f11;
+            line-height: 24px;
+        }
+        
+        .suggestion-content {
+            background-color: white;
+            border: 1px solid #f7f8f9;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .suggestion-content-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .suggestion-text-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .suggestion-subtitle {
+            font-size: 16px;
             font-weight: 600;
-            color: #1e293b;
+            color: #0d0f11;
+            line-height: 24px;
+        }
+        
+        .suggestion-text {
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748b;
+            line-height: 20px;
+        }
+        
+        .suggestion-button {
+            background-color: #1d4ed8;
+            border: 1px solid #e7eaee;
+            border-radius: 8px;
+            padding: 4px 24px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-self: flex-end;
+        }
+        
+        .suggestion-button:hover {
+            background-color: #1e40af;
         }
         
         /* Search */
@@ -461,22 +955,36 @@
 <body>
     <!-- Login Screen -->
     <div id="loginScreen" class="auth-container">
+        <img src="http://localhost:3845/assets/1a1faf3c7f8271a35ff3660559873abcc2e667e7.svg" alt="" class="gradient-mesh">
+        <img src="http://localhost:3845/assets/4e2d7d06493135825e41ee752d5aa83528fa604c.svg" alt="" class="auth-logo-bg">
         <div class="auth-card">
-            <h1 class="auth-title">Welcome Back</h1>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+            <div class="auth-content">
+                <img src="http://localhost:3845/assets/19d440781b6b42884d6f4a65be3b198d408189e4.svg" alt="Logo" class="auth-logo-icon">
+                <div class="auth-header">
+                    <h1 class="auth-title">Welcome back</h1>
+                    <p class="auth-subtitle">Continue improving your assignments with<br>smart AI assistance.</p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
+            </div>
+            <form id="loginForm" class="auth-form-container">
+                <div class="auth-input-group">
+                    <div class="input-field">
+                        <img src="http://localhost:3845/assets/e874fedc969dc37b615c9798d8c814e68c4911ce.svg" alt="" class="input-icon">
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-field-password">
+                            <img src="http://localhost:3845/assets/e197d5426c46729d04eaa255a13aec6c5ba6644d.svg" alt="" class="input-icon">
+                            <input type="password" id="password" placeholder="Password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                <img src="http://localhost:3845/assets/980a63f668b16d6a007238c2c4fe1715aca3df28.svg" alt="" class="input-icon">
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Sign In</button>
             </form>
             <div class="auth-switch">
-                <span class="text-gray-600">Don't have an account? </span>
-                <button onclick="showSignup()" class="btn-link">Sign up</button>
+                Don't have an account? <button onclick="showSignup()" class="btn-link">Signup</button>
             </div>
             <div id="loginMessage"></div>
         </div>
@@ -484,30 +992,42 @@
 
     <!-- Sign Up Screen -->
     <div id="signupScreen" class="auth-container hidden">
+        <img src="http://localhost:3845/assets/1a1faf3c7f8271a35ff3660559873abcc2e667e7.svg" alt="" class="gradient-mesh">
+        <img src="http://localhost:3845/assets/4e2d7d06493135825e41ee752d5aa83528fa604c.svg" alt="" class="auth-logo-bg">
         <div class="auth-card">
-            <h1 class="auth-title">Create Account</h1>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" required>
+            <div class="auth-content">
+                <img src="http://localhost:3845/assets/19d440781b6b42884d6f4a65be3b198d408189e4.svg" alt="Logo" class="auth-logo-icon">
+                <div class="auth-header">
+                    <h1 class="auth-title">Create Account</h1>
+                    <p class="auth-subtitle">Start improving your assignments with<br>smart AI assistance.</p>
                 </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentId">Student ID (Optional)</label>
-                    <input type="text" id="studentId">
+            </div>
+            <form id="signupForm" class="auth-form-container">
+                <div class="auth-input-group">
+                    <div class="input-field">
+                        <img src="http://localhost:3845/assets/e874fedc969dc37b615c9798d8c814e68c4911ce.svg" alt="" class="input-icon">
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-field-password">
+                            <img src="http://localhost:3845/assets/e197d5426c46729d04eaa255a13aec6c5ba6644d.svg" alt="" class="input-icon">
+                            <input type="password" id="signupPassword" placeholder="Password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('signupPassword')">
+                                <img src="http://localhost:3845/assets/980a63f668b16d6a007238c2c4fe1715aca3df28.svg" alt="" class="input-icon">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-field input-no-icon">
+                        <input type="text" id="fullName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-field input-no-icon">
+                        <input type="text" id="studentId" placeholder="Student ID (Optional)">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </form>
             <div class="auth-switch">
-                <span class="text-gray-600">Already have an account? </span>
-                <button onclick="showLogin()" class="btn-link">Sign in</button>
+                Already have an account? <button onclick="showLogin()" class="btn-link">Sign in</button>
             </div>
             <div id="signupMessage"></div>
         </div>
@@ -517,51 +1037,95 @@
     <div id="mainApp" class="app-container hidden">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">📚 Academic Helper</div>
+            <!-- Logo -->
+            <div class="sidebar-logo">
+                <img src="http://localhost:3845/assets/1fc63e63b0005cab58a6026b3398f3903dca409e.svg" alt="Company Logo" class="company-logo">
             </div>
-            <nav>
-                <a href="#" class="nav-item active" onclick="showView('analysis')">
-                    📊 Assignment Analysis
-                </a>
-                <a href="#" class="nav-item" onclick="showView('sources')">
-                    🔍 Source Search
-                </a>
-                <a href="#" class="nav-item" onclick="showView('history')">
-                    📋 Previous Queries
-                </a>
-            </nav>
+            
+            <!-- Main Menu -->
+            <div class="nav-section">
+                <div class="nav-section-header">Main Menu</div>
+                <div class="nav-menu">
+                    <a href="#" class="nav-item active" onclick="showView('analysis')">
+                        <img src="http://localhost:3845/assets/28388eacd5deafb10859bc1f9faf74a5b64d5e07.svg" alt="" class="nav-icon">
+                        <span class="nav-text">Assignment Analysis</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showView('sources')">
+                        <img src="http://localhost:3845/assets/af032e3753638ba2e5babae573d024fdbf3d4877.svg" alt="" class="nav-icon">
+                        <span class="nav-text">Source Search</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showView('history')">
+                        <img src="http://localhost:3845/assets/b52496381cb52cd2d13843eee06e3558b3097cc4.svg" alt="" class="nav-icon">
+                        <span class="nav-text">Previous Queries</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- General Section -->
+            <div class="nav-bottom">
+                <div class="nav-section">
+                    <div class="nav-section-header">General</div>
+                    <div class="nav-menu">
+                        <a href="#" class="nav-item" onclick="logout()">
+                            <img src="http://localhost:3845/assets/a81e48721c8436fab457ff13a580bae82517a886.svg" alt="" class="nav-icon">
+                            <span class="nav-text" style="color: #f54900;">Logout</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="user-profile">
+                    <div class="user-avatar" id="userAvatar">
+                        <img src="http://localhost:3845/assets/9ee507647e4d2aaf280cc033e07e6f9cf688846f.png" alt="User" id="userAvatarImg">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Abdella Teshome</div>
+                        <div class="user-email" id="userEmail">Abdella@gmail.com</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Header -->
-            <div class="header">
-                <h1 id="pageTitle">Assignment Analysis</h1>
-                <div class="user-info">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <div>
-                        <div class="font-semibold" id="userName">User</div>
-                        <button onclick="logout()" class="btn-link text-sm">Sign out</button>
-                    </div>
+            <!-- Top Header -->
+            <div class="top-header">
+                <div class="page-header">
+                    <h1 class="page-title" id="pageTitle">Assignment Analysis</h1>
+                    <p class="page-subtitle">Review your work and detect plagiarism with AI precision.</p>
                 </div>
+                <button class="upload-btn-header" onclick="document.getElementById('assignmentFile').click()">
+                    <img src="http://localhost:3845/assets/9f9c1494c8c9c21c6d86216a676b73466abe956d.svg" alt="" style="width: 24px; height: 24px;">
+                    <span>Upload Assignment</span>
+                </button>
             </div>
+            
+            <!-- Content Area -->
+            <div class="content-area">
 
             <!-- Assignment Analysis View -->
             <div id="analysisView">
                 <!-- Upload Card -->
-                <div class="card">
-                    <h2 class="card-title">Start a New Analysis</h2>
-                    <div class="upload-area" id="uploadArea">
-                        <div class="upload-icon">📄</div>
-                        <div class="upload-text">Drop your assignment here or click to browse</div>
-                        <div class="upload-subtext">Max file size: 10MB. Supported formats: PDF, DOCX</div>
-                        <input type="file" id="assignmentFile" accept=".pdf,.docx" class="hidden">
+                <div class="main-card">
+                    <div class="upload-container">
+                        <h2 class="upload-title">Start a New Analysis</h2>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-content">
+                                <img src="http://localhost:3845/assets/51a134b88543a30b1954ff16a624ddb9cb10056c.svg" alt="" class="upload-icon">
+                                <div class="upload-text">
+                                    <span class="upload-text-bold">Click to upload your assignment</span>
+                                    <span> or drag and drop</span>
+                                </div>
+                                <div class="upload-subtext">PDF, DOCX up to 10MB</div>
+                            </div>
+                            <input type="file" id="assignmentFile" accept=".pdf,.docx" class="hidden">
+                        </div>
                     </div>
-                    <div class="mt-4">
-                        <div class="form-group">
-                            <label for="academicLevel">Academic Level (Optional)</label>
-                            <select id="academicLevel" class="filter-select">
+                    
+                    <div style="display: flex; gap: 32px; align-items: flex-start;">
+                        <div style="display: flex; flex-direction: column; gap: 8px; width: 202px;">
+                            <label style="font-size: 16px; font-weight: 500; color: #0d0f11; line-height: 24px;">Academic Level (Optional)</label>
+                            <select id="academicLevel" style="background: white; border: 1px solid #e7eaee; border-radius: 8px; padding: 8px 12px; font-size: 14px; color: #0d0f11; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
                                 <option value="">Select Level</option>
                                 <option value="High School">High School</option>
                                 <option value="Undergraduate">Undergraduate</option>
@@ -569,68 +1133,110 @@
                                 <option value="PhD">PhD</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="assignmentTopic">Topic/Title (Optional)</label>
-                            <input type="text" id="assignmentTopic" placeholder="e.g., Climate Change Research">
+                        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                            <label style="font-size: 16px; font-weight: 500; color: #0d0f11; line-height: 24px;">Topic/Title (Optional)</label>
+                            <input type="text" id="assignmentTopic" placeholder="e.g Climate Change Research" style="background: white; border: 1px solid #e7eaee; border-radius: 8px; padding: 8px 16px; font-size: 14px; color: #0d0f11;">
                         </div>
                     </div>
                 </div>
 
                 <!-- Processing State -->
-                <div id="processingState" class="card hidden">
-                    <h2 class="card-title">Processing Your Assignment</h2>
-                    <div class="text-center">
-                        <div class="upload-icon">⏳</div>
-                        <div class="upload-text">Analyzing your document...</div>
-                        <div class="upload-subtext">This may take a few moments</div>
+                <div id="processingState" class="main-card hidden">
+                    <div class="upload-container">
+                        <h2 class="upload-title">Analyzing your document</h2>
+                        <div class="upload-area analyzing">
+                            <img src="http://localhost:3845/assets/c61d21c7598593db9038249c62c561759f631afd.svg" alt="" class="upload-gradient-mesh">
+                            <div class="upload-content">
+                                <img src="http://localhost:3845/assets/dac3e080659cd842fed7ff22130786209b0bbf71.svg" alt="" class="upload-icon">
+                                <div class="upload-analyzing-text">Analyzing your document...</div>
+                                <div class="upload-analyzing-subtext">This may take a few moment</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Analysis Results -->
                 <div id="analysisResults" class="hidden">
-                    <div class="card">
-                        <h2 class="card-title">Analysis Report for <span id="assignmentName">Assignment</span></h2>
+                    <div class="main-card">
+                        <div class="report-header">
+                            <h2 class="report-title">
+                                <span class="report-title-label">Analysis Report:</span>
+                                <span id="assignmentName"> Cyber Security 101.docx</span>
+                            </h2>
+                            
+                            <!-- Score Cards -->
+                            <div class="score-cards">
+                                <div class="score-card">
+                                    <img src="http://localhost:3845/assets/66288337665019b6a9dd2ee361a3b486c34cb443.png" alt="" class="score-card-bg">
+                                    <div class="score-card-header">
+                                        <div class="score-card-title">Plagiarism Score</div>
+                                        <div class="score-card-tag">
+                                            <img src="http://localhost:3845/assets/b6059ba467dbd1cc3e320568633057ee685ad55c.svg" alt="" class="score-card-tag-icon">
+                                        </div>
+                                    </div>
+                                    <div class="score-value" id="plagiarismScore">32%</div>
+                                </div>
+                                <div class="score-card">
+                                    <img src="http://localhost:3845/assets/66288337665019b6a9dd2ee361a3b486c34cb443.png" alt="" class="score-card-bg">
+                                    <div class="score-card-header">
+                                        <div class="score-card-title">Confidence Score</div>
+                                        <div class="score-card-tag">
+                                            <img src="http://localhost:3845/assets/1cb672dc72bbf18091b9673449930839421617f8.svg" alt="" class="score-card-tag-icon">
+                                        </div>
+                                    </div>
+                                    <div class="score-value" id="confidenceScore">85%</div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <!-- Score Summary -->
-                        <div class="score-summary">
-                            <div class="score-card">
-                                <div class="score-value score-good" id="plagiarismScore">0%</div>
-                                <div class="score-label">Plagiarism Score</div>
+                        <!-- Info Cards -->
+                        <div class="info-cards">
+                            <div class="info-card">
+                                <div class="info-label">Topic</div>
+                                <div class="info-value" id="analysisTopic">Cyber Secuirty</div>
                             </div>
-                            <div class="score-card">
-                                <div class="score-value" id="confidenceScore">85%</div>
-                                <div class="score-label">Confidence Score</div>
+                            <div class="info-card">
+                                <div class="info-label">Academic Level</div>
+                                <div class="info-value" id="analysisLevel">Undergraduate</div>
                             </div>
-                        </div>
-
-                        <!-- Key Metrics -->
-                        <div class="metrics-grid">
-                            <div class="metric-chip">
-                                <div class="metric-label">Topic</div>
-                                <div class="metric-value" id="analysisTopic">Sample Topic</div>
-                            </div>
-                            <div class="metric-chip">
-                                <div class="metric-label">Academic Level</div>
-                                <div class="metric-value" id="analysisLevel">Undergraduate</div>
-                            </div>
-                            <div class="metric-chip">
-                                <div class="metric-label">Word Count</div>
-                                <div class="metric-value" id="analysisWordCount">0</div>
+                            <div class="info-card">
+                                <div class="info-label">Word Count</div>
+                                <div class="info-value" id="analysisWordCount">1577</div>
                             </div>
                         </div>
-
-                        <!-- Research Suggestions -->
-                        <div class="card">
-                            <h3 class="card-title">Next Steps & Suggestions</h3>
-                            <p id="researchSuggestions" class="mb-4">Based on the content analysis, consider exploring related academic literature...</p>
-                            <button onclick="showView('sources')" class="btn btn-primary">Explore Suggested Sources</button>
+                    </div>
+                    
+                    <!-- Suggestions Section -->
+                    <div class="suggestions-section">
+                        <div class="suggestion-card suggestion-card-left">
+                            <img src="http://localhost:3845/assets/278e01a358d64538256a0c77f33e62fc4e4a5659.svg" alt="" class="suggestion-gradient">
+                            <div class="suggestion-header">
+                                <div class="suggestion-title">AI Based Suggestions</div>
+                                <img src="http://localhost:3845/assets/a973e85d73515885dfc940c0eaf7c8de3bd920d4.svg" alt="" style="width: 24px; height: 24px;">
+                            </div>
+                            <div class="suggestion-content">
+                                <div class="suggestion-content-inner">
+                                    <div class="suggestion-text-section">
+                                        <div class="suggestion-subtitle">Next Steps</div>
+                                        <div class="suggestion-text" id="researchSuggestions">Based on the content analysis, consider exploring related academic literature on "Cyber Security 101". The assignment contains 1577 words and covers key themes that would benefit from additional scholarly sources.</div>
+                                    </div>
+                                    <button onclick="showView('sources')" class="suggestion-button">Explore sources</button>
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- Citation Recommendations -->
-                        <div class="card">
-                            <h3 class="card-title">Citation Compliance</h3>
-                            <p id="citationRecommendations" class="mb-4">Use APA format for citations. Ensure all sources are properly cited and referenced.</p>
-                            <button class="btn btn-secondary">View Citation Guide</button>
+                        <div class="suggestion-card suggestion-card-right">
+                            <div class="suggestion-header">
+                                <div class="suggestion-title">Citation Compliance</div>
+                            </div>
+                            <div class="suggestion-content">
+                                <div class="suggestion-content-inner">
+                                    <div class="suggestion-text-section">
+                                        <div class="suggestion-subtitle">Citation Standards</div>
+                                        <div class="suggestion-text" id="citationRecommendations">Use APA format for citations, Ensure all sources are properly cited and referenced</div>
+                                    </div>
+                                    <button class="suggestion-button">View citation guide</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -698,6 +1304,8 @@
                     </table>
                 </div>
             </div>
+            </div>
+            </div>
         </div>
     </div>
 
@@ -747,8 +1355,10 @@
 
         function updateUserInfo() {
             if (currentUserName) {
-                document.getElementById('userName').textContent = currentUserName;
-                document.getElementById('userAvatar').textContent = currentUserName.charAt(0).toUpperCase();
+                const userNameEl = document.getElementById('userName');
+                const userEmailEl = document.getElementById('userEmail');
+                if (userNameEl) userNameEl.textContent = currentUserName;
+                if (userEmailEl) userEmailEl.textContent = currentUserEmail || 'User@email.com';
             }
         }
 
@@ -868,13 +1478,23 @@
             // Show selected view
             document.getElementById(viewName + 'View').classList.remove('hidden');
             
-            // Update page title
+            // Update page title and navigation
             const titles = {
                 'analysis': 'Assignment Analysis',
                 'sources': 'Source Search',
                 'history': 'Previous Queries'
             };
-            document.getElementById('pageTitle').textContent = titles[viewName];
+            const pageTitleEl = document.getElementById('pageTitle');
+            if (pageTitleEl) pageTitleEl.textContent = titles[viewName];
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (event && event.target) {
+                const navItem = event.target.closest('.nav-item');
+                if (navItem) navItem.classList.add('active');
+            }
             
             currentView = viewName;
             
@@ -1125,6 +1745,15 @@
 
         function showLogin() {
             showLoginScreen();
+        }
+        
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
         }
     </script>
 </body>

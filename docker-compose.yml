@@ -32,6 +32,7 @@ services:
         condition: service_healthy
     volumes:
       - ./uploads:/app/uploads
+      - ./web_interface:/app/web_interface
     restart: unless-stopped
 
   n8n:
