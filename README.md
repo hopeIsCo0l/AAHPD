@@ -1,4 +1,4 @@
-# Academic Assignment Helper & Plagiarism Detector (RAG-Powered)
+# Academic Assignment Helper & Plagiarism Detector (RAG-Powered) N8N
 
 A comprehensive backend system that helps students with academic assignments through AI-powered analysis, RAG-based research suggestions, and plagiarism detection.
 
