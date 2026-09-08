@@ -1,4 +1,4 @@
-# Production Dockerfile for Academic Assignment Helper
+u# Production Dockerfile for Academic Assignment Helper
 FROM python:3.11-slim
 
 # Set working directory
